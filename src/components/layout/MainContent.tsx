@@ -2,6 +2,7 @@
 import { FileExplorer } from '@/components/editor/FileExplorer';
 import { AIAgent } from '@/components/ai/AIAgent';
 import { SettingsPanel } from '@/components/settings/SettingsPanel';
+import { IDELayout } from '@/components/ide/IDELayout';
 
 interface MainContentProps {
   currentView: string;
@@ -11,7 +12,7 @@ export const MainContent = ({ currentView }: MainContentProps) => {
   const renderContent = () => {
     switch (currentView) {
       case 'explorer':
-        return <FileExplorer />;
+        return <IDELayout projectName="my-vibe-project" />;
       case 'ai-agent':
         return <AIAgent />;
       case 'settings':
