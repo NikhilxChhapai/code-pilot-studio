@@ -24,38 +24,53 @@ const Index = () => {
     setCurrentView(view);
   };
 
+  // Show auth modal if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'dark' : ''}`}>
+        <div className="bg-background text-foreground w-full h-screen flex items-center justify-center">
+          <div className="text-center space-y-6 max-w-md mx-auto px-4">
+            <div className="space-y-4">
+              <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto">
+                <span className="text-white font-bold text-2xl">V</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                VibeCode IDE
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                AI-Powered Development Environment
+              </p>
+            </div>
+          </div>
+          <AuthModal 
+            isOpen={isAuthModalOpen} 
+            onClose={() => setIsAuthModalOpen(false)} 
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`min-h-screen flex ${theme === 'dark' ? 'dark' : ''}`}>
       <div className="flex w-full bg-background text-foreground">
-        {isAuthenticated && (
+        {/* Mobile-first responsive sidebar */}
+        <div className="hidden lg:block">
           <Sidebar 
             currentView={currentView} 
             onViewChange={handleViewChange}
           />
-        )}
+        </div>
         
-        <div className="flex-1 flex flex-col">
-          {isAuthenticated && (
-            <Header 
-              user={user}
-              theme={theme}
-              onThemeToggle={toggleTheme}
-            />
-          )}
+        <div className="flex-1 flex flex-col min-h-screen">
+          <Header 
+            user={user}
+            theme={theme}
+            onThemeToggle={toggleTheme}
+          />
           
           <main className="flex-1 overflow-hidden">
-            {!isAuthenticated ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    VibeCode IDE
-                  </h1>
-                  <p className="text-xl text-muted-foreground mb-8">
-                    AI-Powered Development Environment
-                  </p>
-                </div>
-              </div>
-            ) : currentView === 'projects' ? (
+            {currentView === 'projects' ? (
               <ProjectSelector />
             ) : (
               <MainContent currentView={currentView} />
@@ -63,10 +78,10 @@ const Index = () => {
           </main>
         </div>
 
-        <AuthModal 
-          isOpen={isAuthModalOpen} 
-          onClose={() => setIsAuthModalOpen(false)} 
-        />
+        {/* Mobile sidebar overlay */}
+        <div className="lg:hidden">
+          {/* This will be handled by a mobile menu toggle in the header */}
+        </div>
       </div>
     </div>
   );
