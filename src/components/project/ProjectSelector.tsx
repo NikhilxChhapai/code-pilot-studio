@@ -107,7 +107,7 @@ export const ProjectSelector = () => {
               </div>
               <h3 className="font-semibold mb-2">Clone from GitHub</h3>
               <p className="text-sm text-muted-foreground">Import repository from GitHub or Git URL</p>
-            </Car dContent>
+            </CardContent>
           </Card>
         </div>
 
