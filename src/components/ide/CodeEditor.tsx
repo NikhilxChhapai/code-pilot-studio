@@ -144,7 +144,7 @@ export default App;`,
           <Textarea
             value={activeTabData.content}
             onChange={(e) => handleContentChange(activeTabData.id, e.target.value)}
-            className="h-full w-full resize-none font-mono text-sm border-0 rounded-none focus-visible:ring-0 bg-background"
+            className="h-full w-full resize-none font-mono text-sm border-0 rounded-none focus-visible:ring-0 bg-background pl-14"
             placeholder="Start typing your code..."
           />
           
@@ -158,12 +158,6 @@ export default App;`,
               ))}
             </div>
           </div>
-          
-          <style jsx>{`
-            textarea {
-              padding-left: 3.5rem !important;
-            }
-          `}</style>
         </div>
       )}
     </div>
